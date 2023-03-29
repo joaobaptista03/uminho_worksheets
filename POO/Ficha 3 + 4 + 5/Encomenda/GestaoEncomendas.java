@@ -111,7 +111,7 @@ public class GestaoEncomendas
     public EncEficiente encomendaMaiorValor() {
         Comparator<EncEficiente> c = (e1,e2) -> (int) (e2.calculaValorTotal() - e1.calculaValorTotal());
 
-        TreeSet<EncEficiente> t = new TreeSet<>();
+        TreeSet<EncEficiente> t = new TreeSet<>(c);
         for(EncEficiente e : this.encomendas.values()) t.add(e);
 
         return t.first().clone();
