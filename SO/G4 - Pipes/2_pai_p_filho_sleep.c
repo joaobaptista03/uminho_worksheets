@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
     else {
         close(pd[0]);
         int enviar = 10;
+        sleep(5);
         write(pd[1], &enviar, sizeof(int));
         printf("Sou o pai (PID -> %d) e enviei %ld bytes com o valor %d\n", getpid(), sizeof(enviar), enviar);
     }
