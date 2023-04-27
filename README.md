@@ -51,3 +51,4 @@ Este repositório contém as soluções para alguns exercícios das cadeiras de 
   - [x] Exercício 1
   - [x] Exercício 2
   - [x] Exercício 3
+  - [x] Exercício 4
