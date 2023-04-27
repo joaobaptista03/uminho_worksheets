@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char **argv) {
     int pd[2];
@@ -8,8 +9,8 @@ int main(int argc, char **argv) {
     int f = fork();
 
     if (f < 0) { 
-        perror("Fork failed!");
-        return -1;
+        write(2, "Error creating child process.\n", 31);
+        exit(EXIT_FAILURE);
     }
 
     if (f == 0) {
