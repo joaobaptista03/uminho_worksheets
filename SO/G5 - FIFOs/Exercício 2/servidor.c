@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    int file = open("test.txt", O_WRONLY);
+    int file = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC);
     if (file < 0) {
         write(2, "Error opening file.\n", 21);
         exit(EXIT_FAILURE);
@@ -27,4 +27,7 @@ int main(int argc, char **argv) {
     while ((bytes = read(fifo, buf, BUFSIZE)) > 0) {
         write(file, buf, bytes);
     }
+
+    close(fifo);
+    close(file);
 }

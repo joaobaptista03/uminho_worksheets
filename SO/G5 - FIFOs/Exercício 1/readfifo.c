@@ -16,4 +16,6 @@ int main(int argc, char **argv) {
     while ((bytes = read(fifo, buf, BUFSIZE)) > 0) {
         write(1, buf, bytes);
     }
+
+    close(fifo);
 }

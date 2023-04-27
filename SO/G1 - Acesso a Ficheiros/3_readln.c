@@ -27,7 +27,9 @@ int main(int argc, char **argv) {
     char *temp = malloc(BUFSIZE * sizeof(char));
     ssize_t bytesRead = readln(fd, temp, BUFSIZE);
     printf("Read %ld bytes/char's from the line \"%s\".\n", bytesRead, temp);
+    
     free(temp);
+    close(fd);
 
     return 0;
 }
