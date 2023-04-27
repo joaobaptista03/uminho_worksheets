@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/wait.h>
 
 int main(int argc, char **argv) {
     int file_stdin = open("etc/passwd", O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -39,12 +40,8 @@ int main(int argc, char **argv) {
             write(2, "Error creating child process.\n", 31);
             exit(EXIT_FAILURE);
         }
-    if (pid_fork == 0) {
-
-    }
-    else if (pid_fork > 0) {
-
-    }
+    if (pid_fork == 0) write(1, "teste\n", 6);
+    else if (pid_fork > 0) wait(NULL);
 
     close(file_stdin);
     close(file_stdout);
