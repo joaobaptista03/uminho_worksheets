@@ -135,12 +135,13 @@ public class GestaoEncomendas
         Map<String,List<Integer>> prods = new HashMap<>();
 
         for(EncEficiente e : this.encomendas.values()) {
-            for(String prod : e.get_lista_produtos()) {
-                if(prods.containsKey(prod)) prods.get(prod).add(e.get_nr_encomenda());
+            for(LinhaEncomenda prod : e.get_linhas()) {
+                if(prods.containsKey(prod.getReferencia())) prods.get(prod.getReferencia()).add(e.get_nr_encomenda());
+
                 else {
                     List<Integer> new_l = new ArrayList<>();
                     new_l.add(e.get_nr_encomenda());
-                    prods.put(prod, new_l);
+                    prods.put(prod.getReferencia(), new_l);
                 }
             }
         }

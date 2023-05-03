@@ -133,6 +133,10 @@ public class EncEficiente
     public void set_data(LocalDate data) {
         this.data = data;
     }
+
+    public EncEficiente clone() {
+        return new EncEficiente(this);
+    }
     
     public List<LinhaEncomenda> get_linhas() {
         List<LinhaEncomenda> clone_linhas = new ArrayList<>();
