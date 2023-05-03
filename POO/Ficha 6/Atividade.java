@@ -69,8 +69,6 @@ public abstract class Atividade {
                 ", duracao=" + duracao +
                 '}';
     }
-
-
     
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,5 +82,6 @@ public abstract class Atividade {
 
 
     public abstract double calorias(Utilizador u);
+    
     public  abstract  Atividade clone( );
 }

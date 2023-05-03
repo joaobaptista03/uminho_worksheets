@@ -16,7 +16,6 @@ public class Canoagem extends Atividade{
         this.nvoltas = 0;
     }
 
-
     public Canoagem(String codigo, String descricao, LocalDate data, int duracao, String barco, double vento, double distancia, int nvoltas) {
         super(codigo, descricao, data, duracao);
         this.barco = barco;

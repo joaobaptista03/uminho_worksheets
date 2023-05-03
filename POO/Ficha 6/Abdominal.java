@@ -39,9 +39,6 @@ public class Abdominal extends Atividade {
         this.repeticoes = repeticoes;
     }
 
-   /**
-    * Nota: a fÃ³rmula estÃ¡ diferente ao que Ã© pedido no enunciado.
-   */
     public double calorias(Utilizador u) {
         return getDuracao()*repeticoes*3/5*(1+1/u.getPeso());
     }

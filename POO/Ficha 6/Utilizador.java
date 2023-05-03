@@ -13,7 +13,6 @@ public class Utilizador {
     private double peso;
     private LocalDate data_nascimento;
     private String desporto_favorito;
-    /* Map de atividades. Podia ser uma lista e mantinha a ordem..*/
     private Map<String, Atividade> atividades;
 
     public Utilizador(){
@@ -27,6 +26,7 @@ public class Utilizador {
         this.desporto_favorito = "";
         this.atividades = new HashMap<>();
     }
+
     public Utilizador(String email, String password, String nome, Genero genero, double altura,
                       double peso, LocalDate data_nascimento, String desporto_favorito,
                       Map<String, Atividade> atividades) {
@@ -53,6 +53,7 @@ public class Utilizador {
         this.desporto_favorito = desporto_favorito;
         this.atividades = new HashMap<>();
     }
+    
     public Utilizador(Utilizador outro){
         this.email = outro.getEmail();
         this.password = outro.getPassword();
