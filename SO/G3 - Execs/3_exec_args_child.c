@@ -3,16 +3,20 @@
 #include <sys/wait.h>
 
 int main(int argc, char **argv) {
-    int execRet;
-
     for(int i = 1; i < argc; i++) {
-        if (fork() == 0) execRet = execlp(argv[i], argv[i], NULL);
+        int fork_nr = fork();
+
+        if (fork_nr < 0) {
+            perror("Error creating child process!");
+            exit(1);
+        }
+
+        if (fork_nr == 0) execlp(argv[i], argv[i], NULL);
     }
 
-    for(int i = 1; i <= argc; i++) {
+    for(int i = 1; i < argc; i++) {
         int status;
         wait(&status);
-        char print[100]; sprintf(print, "\nChild executed with exit code: %d\n", WEXITSTATUS(status));
-        write(1, print, strlen(print) + 1);
+        printf("\nChild executed with exit code: %d\n", WEXITSTATUS(status));
     }
 }

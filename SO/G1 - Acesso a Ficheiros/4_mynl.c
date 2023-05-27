@@ -7,15 +7,19 @@
 #define BUFSIZE 1024
 
 ssize_t readln(int fd, char *line, size_t size) {
-    ssize_t size_r = 0;
-    ssize_t temp;
+  size_t current = 0;
 
-    for (int i = 0; (temp = read(fd, line + i, 1) > 0) && (line[i] != '\n'); i++) 
-        size_r += temp;
+  while (current < size) {
+    ssize_t byte = read(fd, line + current, 1);
 
-    line[strlen(line) - 1] = '\0';
+    if (byte != 1 || line[current] == '\n') {
+      return current;
+    }
 
-    return size_r;
+    current++;
+  }
+
+  return current;
 }
 
 int main(int argc, char **argv) {

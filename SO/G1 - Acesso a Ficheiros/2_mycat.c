@@ -6,8 +6,8 @@ int main(int argc, char* argv[]){
     char input;
 
     if (argc != 1) {
-        printf("Usage: ./mycat\n");
-        return 0;
+        perror("Usage: ./mycat\n");
+        exit(1);
     }
 
     while (read(0, &input, 1) > 0)

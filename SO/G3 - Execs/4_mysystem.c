@@ -4,26 +4,44 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define COMMAND_LENGTH 20
+
 int main(int argc, char **argv){
     if (argc != 2) {
-        write(2, "Invalid arguments. Usage: ./mysystem \"<command>\"", 49);
-        exit(EXIT_FAILURE);
+        perror("Invalid arguments. Usage: ./mysystem \"<command>\"");
+        exit(1);
     }
 
-    char *prog_name = strtok(argv[1], " ");
+    int nr_args = 0;
 
-    char *arg_str = strtok(NULL, "");
-    char **args_list = malloc(sizeof(char*)); args_list[0] = prog_name; 
-    int num_args = 1;
-    char *arg = strtok(arg_str, " ");
-    while (arg != NULL) {
-        num_args++;
-        args_list = realloc(args_list, sizeof(char*) * num_args);
-        args_list[num_args - 1] = strdup(arg);
-        arg = strtok(NULL, " ");
+    char** command = malloc(sizeof(char) * COMMAND_LENGTH);
+    command[0] = strtok(argv[1], " ");
+    char *token = strtok(NULL, " ");
+
+    while (token != NULL) {
+        command = realloc(command, sizeof(char) * COMMAND_LENGTH * (++nr_args + 1));
+        command[nr_args] = token;
+        token = strtok(NULL, " ");
     }
-    args_list = realloc(args_list, sizeof(char*) * (num_args + 1));
-    args_list[num_args] = NULL;
 
-    execvp(prog_name, args_list);
+    command[nr_args + 1] = NULL;
+
+    int pid_child = fork();
+
+    if (pid_child < 0) {
+        perror("Error creating child process!");
+        exit(1);
+    }
+
+    if (pid_child == 0) execvp(command[0], command);
+
+    else {
+        int status;
+        wait(&status);
+        printf("\nChild executed with exit code: %d\n", WEXITSTATUS(status));
+
+        free(command);
+    }
+
+    return 0;
 }

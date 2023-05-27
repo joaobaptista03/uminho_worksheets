@@ -10,8 +10,10 @@ int main(int argc, const char *argv[]){
 
 	for (int i = 1; i <= 10; i ++) {
         pid = fork();
-        if (fork < 0)
+        if (fork < 0) {
             perror("Fork Failed");
+			exit(1);
+		}
 
 		if (pid == 0) {
 			printf("(FILHO %d) PID: %d.\n", i, getpid());
@@ -24,10 +26,10 @@ int main(int argc, const char *argv[]){
 
 		if (pid_filho == -1) {
 			perror("Erro ao esperar por processo filho");
-			exit(EXIT_FAILURE);
+			exit(1);
 		}
 		
-		printf("(PAI) process %d exited with code %d.\n", pid_filho, WEXITSTATUS(status));
+		printf("(PAI) processo filho %d terminou com código %d.\n", pid_filho, WEXITSTATUS(status));
 	}
     return 0;
 }
