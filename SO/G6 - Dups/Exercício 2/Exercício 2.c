@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
             write(2, "Error creating child process.\n", 31);
             exit(EXIT_FAILURE);
         }
-    if (pid_fork == 0) write(1, "teste\n", 6);
+    if (pid_fork == 0) printf("Teste");
     else if (pid_fork > 0) wait(NULL);
 
     close(file_stdin);

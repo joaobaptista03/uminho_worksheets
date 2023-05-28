@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
             exit(EXIT_FAILURE);
     }
 
-    write(1, "terminei", 9);
+    puts("terminei");
 
     close(file_stdin);
     close(file_stdout);

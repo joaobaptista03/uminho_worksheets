@@ -7,29 +7,29 @@ int main() {
     int fd[2];
     pid_t pid;
 
-    if (pipe(fd) == -1) {
-        write(2, "Error creating pipe.\n", 22);
-        exit(EXIT_FAILURE);
+    if (pipe(fd) < 0) {
+        perror("Error creating pipe!");
+        exit(1);
     }
 
     pid = fork();
-    if (pid == -1) {
-        write(2, "Error creating child process.\n", 31);
-        exit(EXIT_FAILURE);
+    if (pid < 0) {
+        perror("Error creating child process!");
+        exit(1);
     }
 
     if (pid == 0) {
         close(fd[1]);
 
-        if (dup2(fd[0], STDIN_FILENO) == -1) {
-            write(2, "Error redirecting stdin descriptor.\n", 37);
-            exit(EXIT_FAILURE);
+        if (dup2(fd[0], STDIN_FILENO) < 0) {
+            perror("Error redirecting stdin descriptor!");
+            exit(1);
         }
 
         execlp("wc", "wc", NULL);
         
-        write(2, "Error executing execlp.\n", 25);
-        exit(EXIT_FAILURE);
+        perror("Error executing execlp.");
+        exit(1);
 
     } else {
         char buffer[1024];
@@ -37,9 +37,9 @@ int main() {
         close(fd[0]);
 
         while ((bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0) {
-            if (write(fd[1], buffer, bytes_read) == -1) {
-                write(2, "Error writing in the pipe.\n", 28);
-                exit(EXIT_FAILURE);
+            if (write(fd[1], buffer, bytes_read) < 0) {
+                perror("Error writing in the pipe!");
+                exit(1);
             }
         }
 
