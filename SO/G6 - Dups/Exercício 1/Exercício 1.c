@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
         }
     if (dup2(file_stdin, 0) < 0) {
         write(2, "Error redirecting stdin descriptor.\n", 37);
-        exit(EXIT_FAILURE);
+        exit(1);
     }
 
     int file_stdout = open("saida.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);

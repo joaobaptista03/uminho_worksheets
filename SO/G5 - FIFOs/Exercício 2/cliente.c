@@ -1,6 +1,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define BUFSIZE 1024
 
@@ -17,4 +19,5 @@ int main(int argc, char **argv) {
     }
 
     close(fifo);
+    unlink("fifo");
 }

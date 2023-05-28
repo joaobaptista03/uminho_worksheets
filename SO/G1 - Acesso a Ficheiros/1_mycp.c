@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define BUFFER 1024
 

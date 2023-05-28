@@ -1,6 +1,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #define BUFSIZE 1024
 
