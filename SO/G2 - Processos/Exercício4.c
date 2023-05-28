@@ -4,12 +4,9 @@
 #include <stdlib.h>
 
 int main(int argc, const char *argv[]){
-    pid_t pid;
-	int status;
-    pid_t pid_filho;
 
 	for (int i = 1; i <= 10; i ++) {
-        pid = fork();
+        pid_t pid = fork();
         if (fork < 0) {
             perror("Fork Failed");
 			exit(1);
@@ -22,14 +19,10 @@ int main(int argc, const char *argv[]){
 	}
 
 	for (int i = 0; i < 10; i++) {
-		pid_filho = wait(&status);
-
-		if (pid_filho == -1) {
-			perror("Erro ao esperar por processo filho");
-			exit(1);
-		}
+		int status;
+		pid_t child_pid = wait(&status);
 		
-		printf("(PAI) processo filho %d terminou com código %d.\n", pid_filho, WEXITSTATUS(status));
+		printf("(PAI) processo filho %d terminou com código %d.\n", child_pid, WEXITSTATUS(status));
 	}
     return 0;
 }

@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
         }
         else {
             int status;
-            pid_t pid_filho = wait(&status);
-            printf("(PAI) O meu processo filho %d terminou com código %d\n", pid_filho, WEXITSTATUS(status));
+            pid_t child_pid = wait(&status);
+            printf("(PAI) O meu processo filho %d terminou com código %d\n", child_pid, WEXITSTATUS(status));
         }
     }
 

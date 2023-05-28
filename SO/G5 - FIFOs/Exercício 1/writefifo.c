@@ -8,7 +8,7 @@
 int main(int argc, char **argv) {
     int fifo = open("fifo", O_WRONLY);
     if (fifo < 0) {
-        write(2, "Error opening fifo.\n", 21);
+        perror("Error opening fifo!");
         exit(EXIT_FAILURE);
     }
 

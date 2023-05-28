@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
     if (mkfifo("fifo", 0666) < 0) {
-        write(2, "Error creating fifo.\n", 22);
+        perror("Error creating fifo!");
         exit(EXIT_FAILURE);
     }
 }

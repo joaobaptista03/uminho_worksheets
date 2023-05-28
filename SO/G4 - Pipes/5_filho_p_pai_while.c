@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
         close(pd[0]);
         int enviar = 10;
         write(pd[1], &enviar, sizeof(int));
+        close(pd[1]);
         printf("Sou o filho (PID -> %d) e enviei %ld bytes com o valor %d\n", getpid(), sizeof(enviar), enviar);
         _exit(0);
     }
@@ -25,6 +26,7 @@ int main(int argc, char **argv) {
         int recebido;
         while(read(pd[0], &recebido, sizeof(int)) > 0)
             printf("Sou o pai (PID -> %d) e recebi %ld bytes com o valor %d\n", getpid(), sizeof(recebido), recebido);
+        close(pd[0]);
     }
 
     return 0;
