@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
+#define BUFFSIZE 1024
+
 int main(int argc, char **argv) {
     int file_stdin = open("etc/passwd", O_WRONLY | O_CREAT | O_TRUNC, 0666);
         if (file_stdin < 0) {
@@ -40,7 +42,18 @@ int main(int argc, char **argv) {
             write(2, "Error creating child process.\n", 31);
             exit(EXIT_FAILURE);
         }
-    if (pid_fork == 0) printf("Teste");
+
+    if (pid_fork == 0) {
+        printf("Teste printf");
+        perror("Teste perror");
+
+        ssize_t bytes_read; char buf[BUFFSIZE];
+        while ((bytes_read = read(0, buf, BUFFSIZE)) > 0) {
+            puts(buf);
+            perror(buf);
+        }
+    }
+
     else if (pid_fork > 0) wait(NULL);
 
     close(file_stdin);
